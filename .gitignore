@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Logs
 logs
 *.log
@@ -71,36 +72,8 @@ typings/
 .yarn-integrity
 
 # dotenv environment variables file
+=======
+node_modules
+>>>>>>> 17a45266fabd30e5502b7633573d714c099e4146
 .env
-.env.test
-
-# parcel-bundler cache (https://parceljs.org/)
-.cache
-
-# Next.js build output
-.next
-
-# Nuxt.js build / generate output
-.nuxt
-dist
-
-# Gatsby files
-.cache/
-# Comment in the public line in if your project uses Gatsby and *not* Next.js
-# https://nextjs.org/blog/next-9-1#public-directory-support
-# public
-
-# vuepress build output
-.vuepress/dist
-
-# Serverless directories
-.serverless/
-
-# FuseBox cache
-.fusebox/
-
-# DynamoDB Local files
-.dynamodb/
-
-# TernJS port file
-.tern-port
+.sql
