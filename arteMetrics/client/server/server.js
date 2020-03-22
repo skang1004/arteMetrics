@@ -11,9 +11,11 @@ const app = express();
 app.use(express.json());
 app.use(cookieParser());
 
-app.get('/', (req, res) => {
+app.use('/build', express.static(path.join(__dirname, '../build')));
+
+app.get('/*', (req, res) => {
   console.log('Hello World');
-  res.sendStatus(200);
+  res.sendFile(path.join(__dirname, '../src2/index.html'));
 });
 
 //middleware that handles getting all queries based on a user's api_key
