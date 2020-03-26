@@ -8,22 +8,31 @@ const QueryTime = () => {
     const paths = [];
     const rootQuery = [];
     const request = [];
+    const response = [];
     const [startOffSet, setStartOffset] = useState(startOffset);
     const [root, setRoot] = useState(rootQuery);
     const [path, setPath] = useState(paths);
     const [resolver, setResolver] = useState(resolverDuration);
 
     d3.json('/query/345').then(queries => {
-      request.push(queries[0])
         const {id, api_key, name, start_time, end_time, duration} = queries[0];
         rootQuery.push(id, api_key, name, start_time, end_time, duration);
         const resolvers = queries[0].resolvers;
+        console.log(rootQuery)
+        console.log(resolvers)
         resolvers.forEach((info, i) => {
             startOffset.push(info['startOffset']);
             resolverDuration.push(info['duration']);
             paths.push(info['path']);
         })
-        console.log(rootQuery[5]- ((startOffset[startOffset.length-1]) - resolverDuration[resolverDuration.length-1]))
+        console.log(startOffSet, resolver)
+        const responseTime = rootQuery[5]- ((startOffSet[startOffSet.length-1]) - resolver[resolver.length-1]);
+        const responseOffset = startOffSet[startOffSet.length - 1] + resolver[resolver.length - 1];
+        response.push(responseTime, responseOffset)
+        resolverDuration.push(response);
+        // console.log('this is response', response)
+        console.log('resolver', resolver)
+
 
         const width = 1400;
         const height = 1000;
@@ -58,8 +67,6 @@ const QueryTime = () => {
 
         //this renders the bars
         svg.selectAll('rect')
-
-        svg.selectAll('rect')
             .data(root[5])
             .enter()
             .append('rect')
@@ -81,6 +88,13 @@ const QueryTime = () => {
             .attr('transform', 'translate(100, 10)')
             .attr('fill', 'navy')
             .attr('class', 'bar')
+
+        svg.selectAll('rect')
+            .data(response)
+            .enter()
+            .append('rect')
+            .attr('x', (d, i) => d[1] / 1000000)
+            // .attr('y', (d, i) => ())
 
         //this renders the path's of each bar
             svg.selectAll('text')
